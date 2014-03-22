@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Index{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/stylesheets/index.css"/>
+{% endblock %}
+        
+{% block js %}
+    <script src="/javascripts/index-typeahead.js"></script>
+{% endblock %}
+
+{% block content %}
+<form class="navbar-form" role="search">
+    <div class="input-group" id="names">
+      <input type="text" class="form-control typeahead">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+</form>
+
+{% endblock %}
