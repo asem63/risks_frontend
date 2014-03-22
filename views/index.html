@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<form class="navbar-form" role="search">
+<form class="navbar-form" role="search" action="/company">
     <div class="input-group" id="names">
-      <input type="text" class="form-control typeahead">
+      <input type="text" class="form-control typeahead" name="name">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+          <input class="btn btn-default" type="submit" value="Submit">
       </span>
     </div><!-- /input-group -->
 </form>
