@@ -10,6 +10,10 @@ $(function() {
     Morris.Line({
         element: 'company-chart',
         data: data,
+        goals: [11, 37, 67, 97],
+        goalLineColors:['red','orange','blue','green'],
+        goalStrokeWidth:2,
+        grid:false,
         xkey: 'y',
         ykeys: ['a'],
         labels: ['Mark']
