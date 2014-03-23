@@ -13,8 +13,11 @@ var app = require('express')(),
     swig = require('swig'),
     people;
 
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', server_port);
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
@@ -51,6 +54,9 @@ app.get('/js/api', routes.api);
 app.get('/company', routes.company);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+
+
+
+http.createServer(app).listen(app.get('port'), server_ip_address,function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
