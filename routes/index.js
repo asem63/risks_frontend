@@ -37,12 +37,14 @@ exports.company = function(req, res){
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query.name;
     console.log("name:"+query);
+
     company_data =
     {
         name: "random_name",
         info:[
             {
                 year:2010,
+                mark: 7,
                 k:{
                     k1: 1.2,
                     k2: 3,
@@ -56,12 +58,12 @@ exports.company = function(req, res){
                     k10: 0.01,
                     k11: 0.5,
                     k12: 0.9,
-                    k13: 2,
-                    mark: 90
+                    k13: 2
                 }
             },
             {
                 year:2011,
+                mark: 20,
                 k:{
                     k1: 1.1,
                     k2: 3,
@@ -75,12 +77,32 @@ exports.company = function(req, res){
                     k10: 0.01,
                     k11: 0.4,
                     k12: 0.7,
-                    k13: 1,
-                    mark: 80
+                    k13: 1
                 }
             },
+            {
+                year:2012,
+                mark: 40,
+                k:{
+                    k1: 1.2,
+                    k2: 3,
+                    k3: 0.5,
+                    k4: 1.5,
+                    k5: 1,
+                    k6: 0.8,
+                    k7: 2,
+                    k8: 1,
+                    k9: 3,
+                    k10: 0.01,
+                    k11: 0.5,
+                    k12: 0.9,
+                    k13: 2
+                }
+            }
         ]
     }
+
+
 
     res.render('company', { data: company_data });
 };
