@@ -1,19 +1,26 @@
 var url = require('url');
 var _ = require('underscore');
+var request = require('request');
+
+var url_company_names = "http://example.com/names";
+var url_company = "http://example.com/company?";
+//var url_test = "http://developer.cumtd.com/api/v2.2/json/GetStop?" +
+//    "key=d99803c970a04223998cabd90a741633" +
+//    "&stop_id=it"
 
 var names = [];
-/*
- * GET home page.
- */
 
 exports.index = function(req, res){
-    names = [
-        { value: "test_remote" },
-        { value: "test_remote2" },
-        { value: "test_remote3" },
-        { value: "ggg_remote" },
-        { value: "mp_remote" }
-    ]
+    request({
+        url: url_company_names,
+        json: true
+    }, function (error, response, body) {
+
+        if (!error && response.statusCode === 200) {
+            console.log(body) // Print the json response
+            names = body;
+        }
+    })
     res.render('index', { test: 'Express' });
 };
 
@@ -35,74 +42,25 @@ exports.api = function(req, res){
 
 exports.company = function(req, res){
     var url_parts = url.parse(req.url, true);
-    var query = url_parts.query.name;
-    console.log("name:"+query);
+    var c_name = url_parts.query.name;
+    console.log("name:"+c_name);
+    var company_data = {};
 
-    company_data =
-    {
-        name: "random_name",
-        info:[
-            {
-                year:2010,
-                mark: 7,
-                k:{
-                    k1: 1.2,
-                    k2: 3,
-                    k3: 0.5,
-                    k4: 1.5,
-                    k5: 1,
-                    k6: 0.8,
-                    k7: 2,
-                    k8: 1,
-                    k9: 3,
-                    k10: 0.01,
-                    k11: 0.5,
-                    k12: 0.9,
-                    k13: 2
-                }
-            },
-            {
-                year:2011,
-                mark: 20,
-                k:{
-                    k1: 1.1,
-                    k2: 3,
-                    k3: 0.5,
-                    k4: 1.3,
-                    k5: 1,
-                    k6: 0.5,
-                    k7: 1,
-                    k8: 1,
-                    k9: 2,
-                    k10: 0.01,
-                    k11: 0.4,
-                    k12: 0.7,
-                    k13: 1
-                }
-            },
-            {
-                year:2012,
-                mark: 40,
-                k:{
-                    k1: 1.2,
-                    k2: 3,
-                    k3: 0.5,
-                    k4: 1.5,
-                    k5: 1,
-                    k6: 0.8,
-                    k7: 2,
-                    k8: 1,
-                    k9: 3,
-                    k10: 0.01,
-                    k11: 0.5,
-                    k12: 0.9,
-                    k13: 2
-                }
-            }
-        ]
-    }
+    request({
+        url: url_company+"name="+c_name,
+        json: true
+    }, function (error, response, body) {
 
-
+        if (!error && response.statusCode === 200) {
+            console.log(body) // Print the json response
+            company_data = body;
+        }else{
+            res.render('index', { test: 'Express' });
+        }
+    })
+    console.log("COMPANYDATA:"+company_data);
 
     res.render('company', { data: company_data });
 };
+
+
