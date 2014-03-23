@@ -19,21 +19,18 @@
     <div class="company-info table-responsive">
         <table class="table table-hover table-bordered">
             <tr>
-                <th>Year</th>
-                <th>Mark</th>
+                <th>Год</th>
+                <th>Оценка</th>
                 <th>k1</th>
                 <th>k2</th>
                 <th>k3</th>
                 <th>k4</th>
                 <th>k5</th>
-                <th>k6</th>
+                <th>k5</th>
                 <th>k7</th>
                 <th>k8</th>
                 <th>k9</th>
                 <th>k10</th>
-                <th>k11</th>
-                <th>k12</th>
-                <th>k13</th>
             </tr>
             {% for year_info in data.info %}
                 <tr>
@@ -49,13 +46,52 @@
                     <td>{{year_info.k.k8}}</td>
                     <td>{{year_info.k.k9}}</td>
                     <td>{{year_info.k.k10}}</td>
-                    <td>{{year_info.k.k11}}</td>
-                    <td>{{year_info.k.k12}}</td>
-                    <td>{{year_info.k.k13}}</td>
                 </tr>
             {% endfor %}
 
         </table>
+    </div>
+    <div class="help">
+        <div class="row">
+            <div class="col-xs-1">k</div>
+            <div class="col-xs-11">Общий показатель ликвидности</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k2</div>
+            <div class="col-xs-11">Коэф. абсолютной ликвидности</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k3</div>
+            <div class="col-xs-11">Коэф. «критической оценки»</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k4</div>
+            <div class="col-xs-11">Коэф. текущей ликвидности</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k5</div>
+            <div class="col-xs-11">Коэф. маневренности функционирующего капитала</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k6</div>
+            <div class="col-xs-11">Коэф. обеспеченности собственными средствами</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k7</div>
+            <div class="col-xs-11">Коэф. автономии</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k8</div>
+            <div class="col-xs-11">Коэф. соотношения заемных и собственных средств</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k9</div>
+            <div class="col-xs-11">Коэф. обеспеченности собственными средствами</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">k10</div>
+            <div class="col-xs-11">Коэф. финансовой устойчивости</div>
+        </div>
     </div>
 </div>
 {% endblock %}

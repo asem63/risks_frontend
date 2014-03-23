@@ -30,7 +30,17 @@ app.use(express.session());
 app.use(app.router);
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+// Handle 404
+app.use(function(req, res) {
+    res.status(404);
+    res.render('error.html', {title: '404: Not Found', error: 404});
+});
 
+// Handle 500
+app.use(function(error, req, res, next) {
+    res.status(500);
+    res.render('error.html', {title:'500: Internal Server Error', error: error});
+});
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
