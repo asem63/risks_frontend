@@ -14,14 +14,13 @@ exports.index = function(req, res){
     }, function (error, response, body) {
 
         if (!error && response.statusCode === 200) {
-            console.log(body) // Print the json response
             for (index = 0; index < body.length; ++index) {
                 names.push({value:body[index]});
             }
         }
     })
 
-    res.render('index', { test: 'Express' });
+    res.render('index');
 };
 
 
@@ -49,16 +48,26 @@ exports.company = function(req, res){
     }, function (error, response, body) {
 
         if (!error && response.statusCode === 200) {
-            console.log(body) // Print the json response
             company_data = body;
+            for (index = 0; index < company_data.result.length; ++index) {
+                company_data.result[index].corporationClass.result = parseFloat(company_data.result[index].corporationClass.result).toFixed(2);
+                company_data.result[index].calculationResult.t21 = parseFloat(company_data.result[index].calculationResult.t21).toFixed(2);
+                company_data.result[index].calculationResult.t22 = parseFloat(company_data.result[index].calculationResult.t22).toFixed(2);
+                company_data.result[index].calculationResult.t23 = parseFloat(company_data.result[index].calculationResult.t23).toFixed(2);
+                company_data.result[index].calculationResult.t24 = parseFloat(company_data.result[index].calculationResult.t24).toFixed(2);
+                company_data.result[index].calculationResult.t25 = parseFloat(company_data.result[index].calculationResult.t25).toFixed(2);
+                company_data.result[index].calculationResult.t26 = parseFloat(company_data.result[index].calculationResult.t26).toFixed(2);
+                company_data.result[index].calculationResult.t31 = parseFloat(company_data.result[index].calculationResult.t31).toFixed(2);
+                company_data.result[index].calculationResult.t32 = parseFloat(company_data.result[index].calculationResult.t32).toFixed(2);
+                company_data.result[index].calculationResult.t33 = parseFloat(company_data.result[index].calculationResult.t33).toFixed(2);
+                company_data.result[index].calculationResult.t34 = parseFloat(company_data.result[index].calculationResult.t34).toFixed(2);
+            }
+            res.render('company', { data: company_data });
         }else{
             res.render('index', { test: 'Express' });
         }
     })
-    console.log("COMPANYDATA: %j",company_data);
 
-
-    res.render('company', { data: company_data });
 };
 
 

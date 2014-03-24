@@ -14,7 +14,7 @@
 
 {% block content %}
 <div class="company">
-    <div class="text-center company-name">{{data.name}}</div>
+    <div class="text-center company-name">{{data.companyName}}</div>
     <div id="company-chart" class="chart"></div>
     <div class="company-info table-responsive">
         <table class="table table-hover table-bordered">
@@ -32,20 +32,23 @@
                 <th>k9</th>
                 <th>k10</th>
             </tr>
-            {% for year_info in data.info %}
+            {% for year_result in data.result %}
                 <tr>
-                    <td class="year">{{year_info.year}}</td>
-                    <td class="mark {% if year_info.mark > 96 %}success{% elseif year_info.mark > 67 %}active{% elseif year_info.mark > 37 %}info{% elseif year_info.mark > 11 %}warning{% else %}danger{% endif %}">{{year_info.mark}}</td>
-                    <td>{{year_info.k.k1}}</td>
-                    <td>{{year_info.k.k2}}</td>
-                    <td>{{year_info.k.k3}}</td>
-                    <td>{{year_info.k.k4}}</td>
-                    <td>{{year_info.k.k5}}</td>
-                    <td>{{year_info.k.k6}}</td>
-                    <td>{{year_info.k.k7}}</td>
-                    <td>{{year_info.k.k8}}</td>
-                    <td>{{year_info.k.k9}}</td>
-                    <td>{{year_info.k.k10}}</td>
+                    <td class="year">{{year_result.year}}</td>
+                    <td class="mark
+                    {% if year_result.corporationClass.result > 96 %}
+                    success
+                    {% elseif year_result.corporationClass.result > 67 %}
+                    active
+                    {% elseif year_result.corporationClass.result > 37 %}
+                    info{% elseif year_result.corporationClass.result > 11 %}
+                    warning
+                    {% else %}danger{% endif %}">
+                        {{year_result.corporationClass.result}}
+                    </td>
+                    {% for mykey,myvalue in year_result.calculationResult %}
+                        <td>{{ myvalue }}</td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
 
