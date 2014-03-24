@@ -14,6 +14,7 @@ exports.index = function(req, res){
     }, function (error, response, body) {
 
         if (!error && response.statusCode === 200) {
+            names=[];
             for (index = 0; index < body.length; ++index) {
                 names.push({value:body[index]});
             }
@@ -21,6 +22,24 @@ exports.index = function(req, res){
     })
 
     res.render('index');
+};
+
+exports.company_list = function(req, res){
+    request({
+        url: url_company_names,
+        json: true
+    }, function (error, response, body) {
+
+        if (!error && response.statusCode === 200) {
+            names=[];
+            for (index = 0; index < body.length; ++index) {
+                names.push({value:body[index]});
+            }
+            res.render('company_list',{ data: names });
+        }
+    })
+
+
 };
 
 
@@ -64,7 +83,7 @@ exports.company = function(req, res){
             }
             res.render('company', { data: company_data });
         }else{
-            res.render('index', { test: 'Express' });
+            res.render('index');
         }
     })
 

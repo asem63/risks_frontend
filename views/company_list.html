@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}All Companies{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/stylesheets/company_list.css"/>
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    {% for company in data %}
+        <p><a class="list-element" href="/company?name={{company.value|url_encode}}">{{company.value}}</a></p>
+    {% endfor %}
+</div>
+
+{% endblock %}
