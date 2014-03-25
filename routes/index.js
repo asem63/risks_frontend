@@ -95,17 +95,17 @@ exports.add_company = function(req, res){
 };
 
 exports.add_company_post = function(req, res){
-    var url_parts = url.parse(req.url, true);
+    console.log('URL:'+req.body);
     var json_response =
     {
-        companyName:url_parts.query.name,
+        companyName:req.body.name,
         info:
             [
-                {year:url_parts.query.year1, c_class:url_parts.query.class1},
-                {year:url_parts.query.year2, c_class:url_parts.query.class2},
-                {year:url_parts.query.year3, c_class:url_parts.query.class3},
-                {year:url_parts.query.year4, c_class:url_parts.query.class4},
-                {year:url_parts.query.year5, c_class:url_parts.query.class5}
+                {year:req.body.year1, c_class:req.body.class1},
+                {year:req.body.year2, c_class:req.body.class2},
+                {year:req.body.year3, c_class:req.body.class3},
+                {year:req.body.year4, c_class:req.body.class4},
+                {year:req.body.year5, c_class:req.body.class5}
             ]
     };
 
@@ -114,7 +114,10 @@ exports.add_company_post = function(req, res){
         method: 'POST',
         json: json_response
     };
-
+    console.log(json_response.companyName);
+    console.log(json_response.info[0].year);
+    console.log(json_response.info[0].c_class);
+    console.log("TEST: %j",json_response);
     request(options, function callback(error, response, body) {
         if (!error) {
             var info = JSON.parse(JSON.stringify(body));
