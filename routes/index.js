@@ -4,6 +4,7 @@ var request = require('request');
 
 var url_company_names = "http://finance-kpirisk.rhcloud.com/rest/risk/corporations";
 var url_company = "http://finance-kpirisk.rhcloud.com/rest/risk/data/";
+var url_company_generate = "http://finance-kpirisk.rhcloud.com/rest/risk/generate";
 
 var names = [];
 
@@ -89,4 +90,41 @@ exports.company = function(req, res){
 
 };
 
+exports.add_company = function(req, res){
+    res.render('add_company');
+};
+
+exports.add_company_post = function(req, res){
+    var url_parts = url.parse(req.url, true);
+    var json_response =
+    {
+        companyName:url_parts.query.name,
+        info:
+            [
+                {year:url_parts.query.year1, c_class:url_parts.query.class1},
+                {year:url_parts.query.year2, c_class:url_parts.query.class2},
+                {year:url_parts.query.year3, c_class:url_parts.query.class3},
+                {year:url_parts.query.year4, c_class:url_parts.query.class4},
+                {year:url_parts.query.year5, c_class:url_parts.query.class5}
+            ]
+    };
+
+    var options = {
+        uri: url_company_generate,
+        method: 'POST',
+        json: json_response
+    };
+
+    request(options, function callback(error, response, body) {
+        if (!error) {
+            var info = JSON.parse(JSON.stringify(body));
+            console.log(info);
+        }
+        else {
+            console.log('Error happened: '+ error);
+        }
+    });
+
+    res.render('index');
+};
 

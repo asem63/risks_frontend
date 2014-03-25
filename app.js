@@ -52,8 +52,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/js/api', routes.api);
 app.get('/company', routes.company);
+app.get('/add_company', routes.add_company);
 app.get('/all_companies', routes.company_list);
 app.get('/users', user.list);
+
+app.post('/add_company_post', routes.add_company_post);
 
 
 
